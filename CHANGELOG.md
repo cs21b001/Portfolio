@@ -128,4 +128,4 @@ See VERSION.md for v2.0.0 roadmap
 - **Minor (1.X.0)**: New features, non-breaking changes
 - **Patch (1.0.X)**: Bug fixes, minor improvements
 
-[1.0.0]: https://github.com/yourusername/portfolio/releases/tag/v1.0.0
+[1.0.0]: https://github.com/cs21b001/Portfolio/releases/tag/v1.0.0

@@ -1,8 +1,12 @@
-# Full Stack Portfolio Website with Admin DashboardThis is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Full Stack Portfolio Website with Admin Dashboard
 
-A modern, production-ready portfolio website built with Next.js 14, TypeScript, Tailwind CSS, and Supabase. Features a beautiful public portfolio and a comprehensive admin dashboard for content management.## Getting Started
+A modern, production-ready portfolio website built with Next.js 14, TypeScript, Tailwind CSS, and Supabase. Features a beautiful public portfolio and a comprehensive admin dashboard for content management.
 
-## 🚀 FeaturesFirst, run the development server:
+[![GitHub release](https://img.shields.io/github/v/release/cs21b001/Portfolio)](https://github.com/cs21b001/Portfolio/releases)
+[![GitHub stars](https://img.shields.io/github/stars/cs21b001/Portfolio)](https://github.com/cs21b001/Portfolio/stargazers)
+[![GitHub license](https://img.shields.io/github/license/cs21b001/Portfolio)](https://github.com/cs21b001/Portfolio/blob/main/LICENSE)
+
+## 🚀 Features
 
 ### Public Portfolio```bash
 
@@ -81,7 +85,7 @@ Before you begin, ensure you have:
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/cs21b001/Portfolio.git
 cd portfolio
 ```
 
@@ -315,15 +319,13 @@ portfolio/
 
 ## 🚢 Deployment to Vercel
 
-### 1. Push to GitHub
+### Quick Deploy
 
-```bash
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/cs21b001/Portfolio)
 
-### 2. Deploy to Vercel
+### Manual Deployment
+
+### 1. Deploy to Vercel
 
 1. Go to [Vercel](https://vercel.com)
 2. Click "New Project"
@@ -424,6 +426,17 @@ This is a template project. Feel free to:
 - Fork and customize for your own portfolio
 - Submit issues for bugs
 - Suggest new features
+
+## 🌐 Live Demo
+
+- **Portfolio**: Coming soon (Deploy to see your live site!)
+- **GitHub Repository**: [https://github.com/cs21b001/Portfolio](https://github.com/cs21b001/Portfolio)
+
+## 📊 Version History
+
+See [CHANGELOG.md](./CHANGELOG.md) for detailed version history and [VERSION.md](./VERSION.md) for release notes.
+
+**Current Version**: v1.0.0
 
 ## 📄 License
 
