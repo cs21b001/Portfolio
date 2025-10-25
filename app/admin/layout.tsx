@@ -14,7 +14,7 @@ export default function AdminLayout({
       <AdminSidebar />
       <div className="lg:ml-64 transition-all duration-300">
         <AdminHeader />
-        <main className="p-6">{children}</main>
+        <main className="p-6 pb-24 lg:pb-6">{children}</main>
       </div>
       <Toaster position="bottom-right" />
     </div>

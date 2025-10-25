@@ -7,52 +7,57 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+    <div className="group glass glass-hover glass-noise rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
       {project.image_url && (
-        <div className="relative h-48 bg-gray-200 dark:bg-gray-700">
+        <div className="relative h-48 overflow-hidden">
           <img
             src={project.image_url}
             alt={project.title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
+          {/* Gradient overlay for better text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
           {project.is_featured && (
-            <span className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-              Featured
+            <span className="absolute top-4 right-4 glass-strong rounded-full px-4 py-1.5 text-white text-sm font-semibold shadow-lg backdrop-blur-md">
+              ⭐ Featured
             </span>
           )}
         </div>
       )}
       
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+      <div className="p-6 backdrop-blur-sm">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
           {project.title}
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <p className="text-gray-700 dark:text-white/80 mb-4 line-clamp-2">
           {project.short_description}
         </p>
         
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-6">
           {project.technologies.slice(0, 4).map((tech, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm"
+              className="glass-strong rounded-full px-3 py-1.5 text-gray-800 dark:text-white/90 text-xs font-medium shadow-sm"
             >
               {tech}
             </span>
           ))}
           {project.technologies.length > 4 && (
-            <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
-              +{project.technologies.length - 4}
+            <span className="glass rounded-full px-3 py-1.5 text-gray-600 dark:text-white/70 text-xs">
+              +{project.technologies.length - 4} more
             </span>
           )}
         </div>
         
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pt-4 border-t border-gray-900/10 dark:border-white/10">
           <Link
             href={`/projects/${project.id}`}
-            className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+            className="glass-strong glass-hover rounded-lg px-4 py-2 text-gray-900 dark:text-white font-medium text-sm inline-flex items-center gap-2 transition-all"
           >
-            View Details →
+            View Details
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </Link>
           
           <div className="flex gap-2">
@@ -61,7 +66,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 href={project.demo_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="glass rounded-lg p-2.5 text-gray-700 dark:text-white/80 hover:text-gray-900 dark:hover:text-white hover:bg-white/20 transition-all"
                 aria-label="Live Demo"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,7 +79,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 href={project.github_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="glass rounded-lg p-2.5 text-gray-700 dark:text-white/80 hover:text-gray-900 dark:hover:text-white hover:bg-white/20 transition-all"
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

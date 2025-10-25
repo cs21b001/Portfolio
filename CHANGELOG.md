@@ -5,6 +5,96 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-10-26
+
+### Added
+
+- **Glassmorphism Design System**
+
+  - Custom glass utilities (.glass, .glass-strong) with matte finish
+  - Backdrop blur with saturation filters for enhanced colors
+  - Gradient animated backgrounds throughout the site
+  - Glass noise texture overlay for depth
+  - Responsive glass hover effects with transforms
+  - Dark mode optimized glass effects
+
+- **Dynamic Code Background Animation**
+
+  - Canvas-based typing/erasing code animation
+  - Multi-language code snippets (JS, Python, CSS, SQL, Git, etc.)
+  - Horizontal typing effect (not falling Matrix-style)
+  - Optimized code density (fewer lines, better spacing)
+  - Light mode: subtle slate-gray text
+  - Dark mode: colorful syntax highlighting (purple, blue, green, red)
+  - Blinking cursor animation during typing
+  - Clean erasing with clearRect (no traces)
+  - Responsive distribution across all screen sizes
+
+- **Interactive Typing Name Animation**
+
+  - TypingText component with customizable text array
+  - Smooth character-by-character typing
+  - Clean backspace-style erasing
+  - Blinking cursor effect
+  - Gradient text support
+  - Fully responsive with reserved minimum height
+
+- **Mobile-First Admin Navigation**
+  - Instagram/WhatsApp style bottom navbar
+  - 5-icon navigation bar with "More" menu
+  - Slide-up bottom sheet for additional options
+  - Large tap targets for better mobile UX
+  - Smooth animations (slide-up effect)
+  - Backdrop overlay with tap-to-close
+  - Safe area support for notched devices
+  - Desktop sidebar unchanged
+
+### Changed
+
+- **Complete UI/UX Transformation**
+
+  - All pages now use glassmorphism design
+  - Floating glass orbs for depth and visual interest
+  - Gradient text for headings (blue-to-purple)
+  - Enhanced shadows and lighting effects
+  - Improved card hover states with lift effect
+  - Better text contrast and readability
+
+- **Layout Improvements**
+
+  - Removed old solid backgrounds
+  - Added CodeBackground to all sections
+  - Proper padding management for mobile nav
+  - Responsive text sizing (4xl → 7xl)
+  - Two-line hero layout for better mobile display
+
+- **Component Enhancements**
+  - Header: Glass navbar with gradient logo
+  - Footer: Glass footer with gradient accents
+  - ProjectCard: Glass cards with image zoom on hover
+  - ExperienceTimeline: Glass timeline with gradient dots
+  - SkillsSection: Glass skill cards with gradient progress bars
+  - ContactForm: Glass input fields with smooth focus states
+  - AboutSection: Glass content panels with gradient borders
+
+### Technical
+
+- Added custom Tailwind animations (float, glow, slide-up)
+- Extended Tailwind with backdrop-blur-xs
+- Created reusable animation keyframes
+- Implemented safe-area-inset for mobile devices
+- Added CSS custom scrollbar styling
+- Optimized canvas rendering performance
+- Reduced animation opacity for better performance
+
+### Performance
+
+- Code animation optimized: ~60% fewer lines
+- Doubled line spacing (60px → 120px)
+- Reduced base opacity (0.2 → 0.15)
+- Lower canvas opacity (light: 0.6, dark: 0.7)
+- Frame-based rendering instead of time-based
+
 ## [1.0.0] - 2025-10-24
 
 ### Added

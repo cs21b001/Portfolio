@@ -73,7 +73,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-medium text-gray-800 dark:text-white/90 mb-2"
         >
           Name
         </label>
@@ -83,7 +83,7 @@ export default function ContactForm() {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full px-4 py-3 glass glass-hover border border-gray-900/10 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 transition-all"
           placeholder="Your name"
         />
       </div>
@@ -91,7 +91,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-medium text-gray-800 dark:text-white/90 mb-2"
         >
           Email
         </label>
@@ -101,7 +101,7 @@ export default function ContactForm() {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full px-4 py-3 glass glass-hover border border-gray-900/10 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 transition-all"
           placeholder="your.email@example.com"
         />
       </div>
@@ -109,7 +109,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="subject"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-medium text-gray-800 dark:text-white/90 mb-2"
         >
           Subject
         </label>
@@ -119,7 +119,7 @@ export default function ContactForm() {
           name="subject"
           value={formData.subject}
           onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full px-4 py-3 glass glass-hover border border-gray-900/10 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 transition-all"
           placeholder="How can I help you?"
         />
       </div>
@@ -127,7 +127,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-medium text-gray-800 dark:text-white/90 mb-2"
         >
           Message
         </label>
@@ -137,7 +137,7 @@ export default function ContactForm() {
           rows={6}
           value={formData.message}
           onChange={handleChange}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
+          className="w-full px-4 py-3 glass glass-hover border border-gray-900/10 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 resize-none transition-all"
           placeholder="Your message..."
         ></textarea>
       </div>
@@ -145,9 +145,26 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors font-medium shadow-md hover:shadow-lg"
+        className="w-full px-6 py-4 glass-strong glass-hover rounded-xl text-gray-900 dark:text-white font-medium shadow-xl hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed transition-all group"
       >
-        {loading ? 'Sending...' : 'Send Message'}
+        <span className="flex items-center justify-center gap-2">
+          {loading ? (
+            <>
+              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Sending...
+            </>
+          ) : (
+            <>
+              Send Message
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </>
+          )}
+        </span>
       </button>
     </form>
   )

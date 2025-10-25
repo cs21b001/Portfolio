@@ -11,8 +11,8 @@ interface ProjectGridProps {
 export default function ProjectGrid({ projects, title }: ProjectGridProps) {
   if (projects.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-600 dark:text-gray-400">No projects found.</p>
+      <div className="text-center py-12 glass glass-noise rounded-2xl">
+        <p className="text-gray-600 dark:text-white/70 text-lg">No projects found.</p>
       </div>
     )
   }
@@ -20,7 +20,7 @@ export default function ProjectGrid({ projects, title }: ProjectGridProps) {
   return (
     <div>
       {title && (
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+        <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-300 dark:to-purple-300 bg-clip-text text-transparent">
           {title}
         </h2>
       )}

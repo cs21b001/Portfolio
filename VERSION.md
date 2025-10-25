@@ -1,5 +1,62 @@
 # Version History
 
+## v2.0.0 - Glassmorphism & Animation Update (January 2025)
+
+### 🎨 Major UI Transformation
+
+#### Glassmorphism Design System
+
+- **Glass Utilities**: Advanced glass morphism effects with backdrop blur and saturation
+- **Light Mode**: Matte glass effect with rgba(255,255,255,0.7) and subtle blur
+- **Dark Mode**: Stunning dark glass with rgba(0,0,0,0.2) and enhanced blur
+- **Gradient System**: Animated gradient backgrounds and text effects
+- **Hover Effects**: Enhanced interactive states with transforms and shadows
+
+#### Dynamic Code Background Animation
+
+- **Canvas Animation**: HTML5 canvas-based code typing/erasing animation
+- **Multi-Language**: 38+ code snippets across JavaScript, Python, CSS, SQL, Git, Shell
+- **Smart Positioning**: Optimized distribution across full screen width
+- **Performance**: Optimized rendering with frame-based speed control
+- **Theme-Aware**: Colorful syntax in dark mode, subtle gray in light mode
+
+#### Interactive Typing Name Animation
+
+- **Typing Effect**: Hero name with realistic typing and erasing animation
+- **Customizable**: Reusable TypingText component with configurable speeds
+- **Multiple States**: Cycles through "AMAN KUMAR", "A DEVELOPER", "A PROBLEM SOLVER"
+- **Smooth Transitions**: Character-by-character animation with blinking cursor
+
+#### Mobile-First Admin Navigation
+
+- **Bottom Navigation**: Instagram/WhatsApp style bottom navbar for mobile
+- **Slide-Up Menu**: Elegant bottom sheet for additional navigation items
+- **Touch-Friendly**: Large tap targets optimized for thumb navigation
+- **Safe Area Support**: Proper handling of device notches and bottom bars
+
+### 🚀 Enhancements
+
+- **All Pages**: Transformed with glassmorphism and code backgrounds
+- **Floating Orbs**: Decorative glass orbs with animation
+- **Responsive Hero**: Two-line layout for better mobile display
+- **Enhanced Cards**: All cards updated with glass effects and hover states
+- **Improved Contrast**: Better text readability on glass backgrounds
+
+### 🛠️ Technical
+
+- **New Components**: CodeBackground.tsx, TypingText.tsx
+- **Custom Animations**: slide-up, float, glow keyframes
+- **Tailwind Extensions**: Custom backdrop-blur-xs utility
+- **Global Styles**: Comprehensive glassmorphism utility classes
+
+### 📱 Performance
+
+- **Optimized Canvas**: Efficient rendering with requestAnimationFrame
+- **Responsive Animations**: Adaptive animation density based on screen size
+- **Clean Erasing**: Proper canvas clearing for smooth transitions
+
+---
+
 ## v1.0.0 - Initial Release (October 24, 2025)
 
 ### 🎉 Features

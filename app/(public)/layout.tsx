@@ -10,13 +10,15 @@ export default function PublicLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
-      <Header />
-      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
-        {children}
-      </main>
-      <Footer />
+    <div className="min-h-screen gradient-animated relative">
+      <div className="relative z-10">
+        <Header />
+        <main className="relative">
+          {children}
+        </main>
+        <Footer />
+      </div>
       <Toaster position="bottom-right" />
-    </>
+    </div>
   )
 }

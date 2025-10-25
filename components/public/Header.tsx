@@ -31,24 +31,27 @@ export default function Header() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 transition-colors">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 gradient-animated backdrop-blur-xl shadow-2xl">
+      {/* Subtle gradient overlay for better glass effect */}
+      <div className="absolute inset-0 glass glass-noise border-b border-white/10"></div>
+      
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
+          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-300 dark:to-purple-300 bg-clip-text text-transparent hover:scale-105 transition-transform drop-shadow-lg">
             Portfolio
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400 ${
+                className={`text-sm font-medium px-4 py-2 rounded-lg transition-all ${
                   pathname === link.href
-                    ? 'text-blue-600 dark:text-blue-400'
-                    : 'text-gray-700 dark:text-gray-300'
+                    ? 'glass-strong text-blue-600 dark:text-blue-300 shadow-lg'
+                    : 'text-gray-700 dark:text-white/80 hover:glass hover:text-gray-900 dark:hover:text-white'
                 }`}
               >
                 {link.label}
@@ -58,7 +61,7 @@ export default function Header() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="p-2.5 rounded-lg glass-strong glass-hover text-gray-900 dark:text-white shadow-lg transition-all ml-2"
               aria-label="Toggle theme"
             >
               {isDark ? (
@@ -77,7 +80,7 @@ export default function Header() {
           <div className="md:hidden flex items-center space-x-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+              className="p-2 rounded-lg glass-strong text-gray-900 dark:text-white"
               aria-label="Toggle theme"
             >
               {isDark ? (
@@ -92,7 +95,7 @@ export default function Header() {
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+              className="p-2 rounded-lg glass-strong text-gray-900 dark:text-white"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -110,16 +113,16 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-2">
+          <div className="md:hidden py-4 space-y-2 glass-noise rounded-2xl p-4 mt-2 shadow-xl">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`block px-4 py-2 rounded-lg transition-colors ${
+                className={`block px-4 py-3 rounded-lg transition-all ${
                   pathname === link.href
-                    ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? 'glass-strong text-blue-600 dark:text-blue-300 shadow-lg'
+                    : 'text-gray-700 dark:text-white/80 hover:glass hover:text-gray-900 dark:hover:text-white'
                 }`}
               >
                 {link.label}
