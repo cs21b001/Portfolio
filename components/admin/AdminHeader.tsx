@@ -14,7 +14,8 @@ export default function AdminHeader() {
 
       if (response.ok) {
         toast.success('Logged out successfully')
-        router.push('/admin/login')
+        // Use window.location for full page reload and cache clear
+        window.location.href = '/admin/login'
       } else {
         toast.error('Failed to logout')
       }

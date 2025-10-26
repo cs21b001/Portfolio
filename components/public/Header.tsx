@@ -1,30 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import toast from 'react-hot-toast'
 
 export default function Header() {
   const [isDark, setIsDark] = useState(true)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const pathname = usePathname()
-  const router = useRouter()
-
-  useEffect(() => {
-    // Check authentication status
-    const checkAuth = async () => {
-      try {
-        const response = await fetch('/api/auth/session')
-        const data = await response.json()
-        setIsLoggedIn(!!data.user)
-      } catch (error) {
-        setIsLoggedIn(false)
-      }
-    }
-    checkAuth()
-  }, [pathname])
 
   useEffect(() => {
     const theme = localStorage.getItem('theme') || 'dark'
@@ -37,28 +20,6 @@ export default function Header() {
     setIsDark(!isDark)
     localStorage.setItem('theme', newTheme)
     document.documentElement.classList.toggle('dark')
-  }
-
-  const handleAuthAction = async () => {
-    if (isLoggedIn) {
-      // Logout
-      try {
-        const response = await fetch('/api/auth/logout', { method: 'POST' })
-        if (response.ok) {
-          toast.success('Logged out successfully')
-          setIsLoggedIn(false)
-          router.push('/')
-        } else {
-          toast.error('Failed to logout')
-        }
-      } catch (error) {
-        console.error('Logout error:', error)
-        toast.error('An error occurred during logout')
-      }
-    } else {
-      // Redirect to login
-      router.push('/admin/login')
-    }
   }
 
   const navLinks = [
@@ -97,17 +58,15 @@ export default function Header() {
               </Link>
             ))}
             
-            {/* Auth Button */}
-            <button
-              onClick={handleAuthAction}
-              className={`text-sm font-medium px-4 py-2 rounded-lg transition-all ${
-                isLoggedIn 
-                  ? 'bg-red-600 text-white hover:bg-red-700' 
-                  : 'glass-strong text-blue-600 dark:text-blue-300 shadow-lg hover:scale-105'
-              }`}
+            {/* Admin Login Link */}
+            <Link
+              href="/admin/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium px-4 py-2 rounded-lg transition-all glass-strong text-blue-600 dark:text-blue-300 shadow-lg hover:scale-105"
             >
-              {isLoggedIn ? 'Logout' : 'Login'}
-            </button>
+              Admin
+            </Link>
             
             {/* Theme Toggle */}
             <button
@@ -180,20 +139,16 @@ export default function Header() {
               </Link>
             ))}
             
-            {/* Auth Button Mobile */}
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false)
-                handleAuthAction()
-              }}
-              className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
-                isLoggedIn 
-                  ? 'bg-red-600 text-white hover:bg-red-700' 
-                  : 'glass-strong text-blue-600 dark:text-blue-300'
-              }`}
+            {/* Admin Login Link Mobile */}
+            <Link
+              href="/admin/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-4 py-3 rounded-lg transition-all glass-strong text-blue-600 dark:text-blue-300 text-center"
             >
-              {isLoggedIn ? 'Logout' : 'Login'}
-            </button>
+              Admin
+            </Link>
           </div>
         )}
       </nav>
