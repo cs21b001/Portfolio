@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# SQL files (database setup - keep local only)
+fix_*.sql
+check_*.sql
