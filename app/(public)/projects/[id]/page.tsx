@@ -66,7 +66,7 @@ export default function ProjectDetailPage() {
       </h1>
 
       {project.image_url && (
-        <div className="relative h-96 rounded-lg overflow-hidden mb-8 shadow-xl">
+        <div className="relative h-100 rounded-lg overflow-hidden mb-8 shadow-xl">
           <img
             src={project.image_url}
             alt={project.title}
@@ -76,9 +76,37 @@ export default function ProjectDetailPage() {
       )}
 
       <div className="prose prose-lg dark:prose-invert max-w-none mb-8">
-        <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-          {project.long_description || project.short_description}
-        </p>
+        <div className="text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
+          {(project.long_description || project.short_description)
+            .split('\n')
+            .map((paragraph, idx) => {
+              // Handle bullet points
+              if (paragraph.trim().startsWith('•') || paragraph.trim().startsWith('-')) {
+                return (
+                  <li key={idx} className="ml-6 text-lg">
+                    {paragraph.trim().replace(/^[•-]\s*/, '')}
+                  </li>
+                )
+              }
+              // Handle section headers (lines ending with :)
+              if (paragraph.trim().endsWith(':') && paragraph.length < 100) {
+                return (
+                  <h3 key={idx} className="text-2xl font-bold text-gray-900 dark:text-white mt-6 mb-2">
+                    {paragraph.trim()}
+                  </h3>
+                )
+              }
+              // Regular paragraphs
+              if (paragraph.trim()) {
+                return (
+                  <p key={idx} className="text-lg">
+                    {paragraph}
+                  </p>
+                )
+              }
+              return null
+            })}
+        </div>
       </div>
 
       {/* Technologies */}

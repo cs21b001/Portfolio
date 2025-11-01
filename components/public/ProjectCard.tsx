@@ -7,23 +7,28 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="group glass glass-hover glass-noise rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-      {project.image_url && (
-        <div className="relative h-48 overflow-hidden">
-          <img
-            src={project.image_url}
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          {/* Gradient overlay for better text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-          {project.is_featured && (
-            <span className="absolute top-4 right-4 glass-strong rounded-full px-4 py-1.5 text-white text-sm font-semibold shadow-lg backdrop-blur-md">
-              ⭐ Featured
-            </span>
-          )}
-        </div>
-      )}
+    <div className="group relative p-4">
+      {/* Outer glass slab - floating effect */}
+      <div className="absolute inset-0 glass opacity-40 rounded-2xl blur-sm group-hover:opacity-60 transition-all duration-500"></div>
+      
+      {/* Main card */}
+      <div className="relative glass glass-hover glass-noise rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform group-hover:-translate-y-1">
+        {project.image_url && (
+          <div className="relative h-48 overflow-hidden rounded-t-2xl">
+            <img
+              src={project.image_url}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            {/* Gradient overlay for better text contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+            {project.is_featured && (
+              <span className="absolute top-4 right-4 glass-strong rounded-full px-4 py-1.5 text-gray-900 dark:text-white text-sm font-semibold shadow-lg backdrop-blur-md">
+                ⭐ Featured
+              </span>
+            )}
+          </div>
+        )}
       
       <div className="p-6 backdrop-blur-sm">
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
@@ -89,6 +94,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

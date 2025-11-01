@@ -10,6 +10,7 @@ export default function ProjectsPage() {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedTech, setSelectedTech] = useState<string>('all')
+  const [searchQuery, setSearchQuery] = useState<string>('')
 
   useEffect(() => {
     fetch('/api/projects')
@@ -30,15 +31,38 @@ export default function ProjectsPage() {
     new Set(projects.flatMap((p) => p.technologies))
   ).sort()
 
-  const handleFilterChange = (tech: string) => {
-    setSelectedTech(tech)
-    if (tech === 'all') {
-      setFilteredProjects(projects)
-    } else {
-      setFilteredProjects(
-        projects.filter((p) => p.technologies.includes(tech))
+  const filterProjects = (tech: string, search: string) => {
+    let filtered = projects
+
+    // Filter by technology
+    if (tech !== 'all') {
+      filtered = filtered.filter((p) =>
+        p.technologies.some(t => t.toLowerCase() === tech.toLowerCase())
       )
     }
+
+    // Filter by search query
+    if (search.trim()) {
+      const query = search.toLowerCase()
+      filtered = filtered.filter((p) =>
+        p.title.toLowerCase().includes(query) ||
+        p.short_description.toLowerCase().includes(query) ||
+        p.technologies.some(t => t.toLowerCase().includes(query))
+      )
+    }
+
+    setFilteredProjects(filtered)
+  }
+
+  const handleFilterChange = (tech: string) => {
+    setSelectedTech(tech)
+    filterProjects(tech, searchQuery)
+  }
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value
+    setSearchQuery(query)
+    filterProjects(selectedTech, query)
   }
 
   return (
@@ -62,10 +86,71 @@ export default function ProjectsPage() {
           </p>
         </div>
 
+        {/* Search Bar and Clear Filters */}
+        <div className="mb-8 max-w-3xl mx-auto">
+          <div className="flex gap-3 items-center">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                placeholder="Search projects by name or technology..."
+                className="w-full px-6 py-4 pl-14 glass glass-noise rounded-2xl text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all"
+              />
+              <svg
+                className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 dark:text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              {searchQuery && (
+                <button
+                  onClick={() => {
+                    setSearchQuery('')
+                    filterProjects(selectedTech, '')
+                  }}
+                  className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+            </div>
+            
+            {/* Clear Filters Button */}
+            <button
+              onClick={() => {
+                setSelectedTech('all')
+                setSearchQuery('')
+                setFilteredProjects(projects)
+              }}
+              disabled={selectedTech === 'all' && !searchQuery}
+              className={`px-6 py-4 rounded-2xl font-medium transition-all flex items-center gap-2 whitespace-nowrap ${
+                selectedTech !== 'all' || searchQuery
+                  ? 'glass glass-noise text-red-600 dark:text-red-400 hover:glass-strong hover:bg-red-500/20 cursor-pointer'
+                  : 'glass opacity-40 text-gray-500 dark:text-gray-600 cursor-not-allowed'
+              }`}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Clear Filters
+            </button>
+          </div>
+        </div>
+
         {/* Filter */}
         {allTechnologies.length > 0 && (
           <div className="mb-12">
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="flex flex-wrap gap-2 justify-center items-center">
               <button
                 onClick={() => handleFilterChange('all')}
                 className={`px-4 py-2 rounded-full font-medium transition-all ${
@@ -76,7 +161,7 @@ export default function ProjectsPage() {
               >
                 All
               </button>
-              {allTechnologies.slice(0, 10).map((tech) => (
+              {allTechnologies.slice(0, 5).map((tech) => (
                 <button
                   key={tech}
                   onClick={() => handleFilterChange(tech)}
