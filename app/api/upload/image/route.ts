@@ -2,7 +2,17 @@ import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const ALLOWED_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+  "image/svg+xml",
+  "image/bmp",
+  "image/tiff",
+  "image/x-icon",
+];
 
 export async function POST(request: Request) {
   try {
@@ -11,10 +21,18 @@ export async function POST(request: Request) {
     // Check authentication
     const {
       data: { user },
+      error: authError,
     } = await supabase.auth.getUser();
 
+    console.log("Upload attempt - User:", user?.email || "No user");
+    console.log("Upload attempt - Auth error:", authError);
+
     if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      console.error("Upload failed: User not authenticated");
+      return NextResponse.json(
+        { error: "Unauthorized - Please log in again" },
+        { status: 401 }
+      );
     }
 
     const formData = await request.formData();
@@ -27,7 +45,10 @@ export async function POST(request: Request) {
     // Validate file type
     if (!ALLOWED_TYPES.includes(file.type)) {
       return NextResponse.json(
-        { error: "Invalid file type. Only JPEG, PNG, and WebP are allowed" },
+        {
+          error:
+            "Invalid file type. Allowed: JPEG, JPG, PNG, WebP, GIF, SVG, BMP, TIFF, ICO",
+        },
         { status: 400 }
       );
     }
@@ -65,6 +86,8 @@ export async function POST(request: Request) {
       data: { publicUrl },
     } = supabase.storage.from("project-images").getPublicUrl(data.path);
 
+    console.log("Upload successful:", publicUrl);
+
     return NextResponse.json({
       url: publicUrl,
       path: data.path,
@@ -76,4 +99,16 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+}
+
+// Add OPTIONS handler for CORS
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
 }
