@@ -31,7 +31,7 @@ export default function HomePage() {
       <Hero />
       
       {/* About Section with code background */}
-      <div className="relative gradient-animated py-20">
+      <div id="about-section" className="relative gradient-animated py-20">
         <CodeBackground />
         <AboutSection />
       </div>

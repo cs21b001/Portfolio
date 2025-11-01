@@ -21,6 +21,11 @@ export async function PUT(
 
     const body = await request.json();
 
+    // Convert empty string to null for end_date
+    if (body.end_date === "" || body.is_current) {
+      body.end_date = null;
+    }
+
     const { data, error } = await supabase
       .from("experiences")
       .update(body)

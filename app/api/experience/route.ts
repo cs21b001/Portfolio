@@ -41,6 +41,11 @@ export async function POST(request: Request) {
 
     const body = await request.json();
 
+    // Convert empty string to null for end_date
+    if (body.end_date === "" || body.is_current) {
+      body.end_date = null;
+    }
+
     const { data, error } = await supabase
       .from("experiences")
       .insert(body)

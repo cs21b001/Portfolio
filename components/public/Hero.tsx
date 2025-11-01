@@ -64,8 +64,15 @@ export default function Hero() {
           </div>
 
           {/* Scroll Indicator - Enhanced */}
-          <div className="mt-12 animate-bounce">
-            <div className="glass rounded-full p-3 inline-block">
+          <button 
+            onClick={() => {
+              const aboutSection = document.getElementById('about-section');
+              aboutSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            className="mt-12 animate-bounce cursor-pointer group"
+            aria-label="Scroll to next section"
+          >
+            <div className="glass rounded-full p-3 inline-block group-hover:scale-110 transition-transform duration-300">
               <svg
                 className="w-6 h-6 text-gray-900 dark:text-white"
                 fill="none"
@@ -80,7 +87,7 @@ export default function Hero() {
                 />
               </svg>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </section>
