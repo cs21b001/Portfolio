@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { useAuth } from '@/contexts/AuthContext'
 
 export default function LoginPage() {
   const router = useRouter()
+  const { checkAuth } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -29,8 +31,10 @@ export default function LoginPage() {
 
       if (response.ok) {
         toast.success('Login successful!')
+        // Update auth context immediately
+        await checkAuth()
+        // Then navigate
         router.push('/admin')
-        router.refresh()
       } else {
         toast.error(data.error || 'Login failed')
       }
