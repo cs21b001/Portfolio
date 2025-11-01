@@ -15,6 +15,7 @@ async function fetchApi<T>(
   try {
     const response = await fetch(`${API_URL}/api${endpoint}`, {
       ...options,
+      credentials: "include", // Include cookies for authentication
       headers: {
         "Content-Type": "application/json",
         ...options?.headers,
@@ -93,6 +94,7 @@ export async function uploadFile(
     const response = await fetch(`${API_URL}/api${endpoint}`, {
       method: "POST",
       body: formData,
+      credentials: "include", // Important: Include cookies for authentication
     });
 
     const data = await response.json();
