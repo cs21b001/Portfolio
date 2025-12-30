@@ -17,11 +17,18 @@ export default function HomePage() {
     fetch('/api/projects?featured=true')
       .then((res) => res.json())
       .then((data) => {
-        setFeaturedProjects(data.slice(0, 3))
+        // Check if data is an array before calling slice
+        if (Array.isArray(data)) {
+          setFeaturedProjects(data.slice(0, 3))
+        } else {
+          console.error('API returned non-array data:', data)
+          setFeaturedProjects([])
+        }
         setLoading(false)
       })
       .catch((error) => {
         console.error('Error fetching featured projects:', error)
+        setFeaturedProjects([])
         setLoading(false)
       })
   }, [])
